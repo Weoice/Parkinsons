@@ -6,19 +6,5 @@
       "maxDuration": 60,
       "excludeFiles": "{tests/**,docs/**,.superpowers/**,.pytest_cache/**,**/*.ipynb,**/*.log,**/*.md}"
     }
-  },
-  "routes": [
-    {
-      "src": "^/static/(.*)$",
-      "dest": "/app.py"
-    },
-    {
-      "src": "^/favicon\.png$",
-      "dest": "/app.py"
-    },
-    {
-      "src": "^/(.*)$",
-      "dest": "/app.py"
-    }
-  ]
+  }
 }

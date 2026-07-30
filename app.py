@@ -3,7 +3,6 @@ from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.responses import FileResponse, JSONResponse
-from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from predict_core import predict_from_points
@@ -12,17 +11,11 @@ ROOT = Path(__file__).resolve().parent
 ARTIFACT_DIR = ROOT / "artifacts"
 
 app = FastAPI(title="Parkinson Spiral Predictor")
-app.mount("/static", StaticFiles(directory=str(ROOT / "public")), name="static")
 
 
 @app.get("/")
 def root():
     return FileResponse(ROOT / "public" / "index.html")
-
-
-@app.get("/favicon.png")
-def favicon():
-    return FileResponse(ROOT / "public" / "favicon.png")
 
 
 class PredictRequest(BaseModel):

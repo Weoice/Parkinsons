@@ -1,4 +1,7 @@
-"""Vercel FastAPI entrypoint. Static UI is served from public/ by the CDN."""
+"""Vercel FastAPI entrypoint. CSS/JS are served from public/ by the CDN;
+index.html lives next to this file so FileResponse can read it from inside
+the function bundle (public/ is promoted to the separate static/CDN layer
+and is not reliably readable from the running Python process)."""
 from pathlib import Path
 
 from fastapi import FastAPI
@@ -15,7 +18,7 @@ app = FastAPI(title="Parkinson Spiral Predictor")
 
 @app.get("/")
 def root():
-    return FileResponse(ROOT / "public" / "index.html")
+    return FileResponse(ROOT / "index.html")
 
 
 class PredictRequest(BaseModel):

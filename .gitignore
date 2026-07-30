@@ -1,0 +1,9 @@
+﻿.superpowers/
+.vercel/
+.pytest_cache/
+__pycache__/
+*.pyc
+.venv/
+*.log
+*.png
+.DS_Store

@@ -20,6 +20,11 @@ def root():
     return FileResponse(ROOT / "public" / "index.html")
 
 
+@app.get("/favicon.png")
+def favicon():
+    return FileResponse(ROOT / "public" / "favicon.png")
+
+
 class PredictRequest(BaseModel):
     points: list = Field(default_factory=list)
 

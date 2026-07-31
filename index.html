@@ -3,50 +3,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Parkinson's Disease Prediction Model</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600&family=Source+Serif+4:wght@500;600&display=swap" rel="stylesheet" />
+  <title>Parkinson's Disease Prediction Model — Spiral Kinematics Study</title>
+  <meta name="description" content="Draw a spiral and see a live kinematic score from an XGBoost model trained on tablet-captured Parkinson's spiral drawings. Independent research demo." />
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
+  <header class="masthead">
+    <span class="masthead-mark">Spiral Kinematics Study</span>
+    <span class="masthead-meta">Independent research demo <span class="masthead-dot">·</span> not for clinical use</span>
+  </header>
+
   <div class="layout">
     <aside class="sidebar">
-      <div class="eyebrow">About the disease</div>
+      <div class="eyebrow">Background</div>
       <h2 class="sidebar-title">Parkinson's disease</h2>
       <p>
         A progressive neurological disorder that affects movement. Common motor
-        signs include tremor, stiffness, and slowed motion.
+        signs include resting tremor, rigidity, and slowed, diminished motion
+        (bradykinesia).
       </p>
       <p>
-        Handwriting and spiral drawing can show irregular velocity and jerk,
-        the kind of kinematic signal this demo explores.
+        Handwriting and spiral drawing externalize that motor control loss:
+        strokes slow unevenly, correct themselves mid-line, and accelerate in
+        small jerks a healthy hand rarely produces. This demo scores those
+        motion patterns directly &mdash; not the shape you end up with.
       </p>
       <div class="callout">
-        Passion research project for learning. Not clinical advice or a diagnostic tool.
+        <span class="callout-label">Not a diagnosis</span>
+        This is a personal research project, not a medical device. It cannot
+        confirm or rule out Parkinson's disease.
       </div>
-      <div class="meta">
-        Dataset: UCI spiral drawings<br />
-        Model: XGBoost + kinematics
-      </div>
+      <dl class="fact-list">
+        <div class="fact-row">
+          <dt>Dataset</dt>
+          <dd>UCI spiral drawings, digitizing tablet, 40 subjects</dd>
+        </div>
+        <div class="fact-row">
+          <dt>Model</dt>
+          <dd>XGBoost on engineered kinematic features</dd>
+        </div>
+        <div class="fact-row">
+          <dt>Signal</dt>
+          <dd>Velocity, acceleration, jerk, pressure variance</dd>
+        </div>
+      </dl>
     </aside>
 
     <main class="main">
-      <div class="eyebrow">Informational research demo</div>
+      <div class="eyebrow">Interactive figure</div>
       <h1>Parkinson's Disease Prediction Model</h1>
       <p class="lede">
-        Trace the faint spiral in one continuous stroke, then lift your pointer.
-        The model compares your drawing's motion patterns to labeled tablet recordings.
+        Trace the faint spiral below in one continuous stroke, then lift your
+        pointer. The model compares your drawing's velocity and jerk &mdash;
+        not its shape &mdash; against labeled tablet recordings.
       </p>
 
       <div class="demo">
-        <div class="canvas-panel">
-          <canvas id="spiral-canvas" width="480" height="480" aria-label="Spiral drawing canvas"></canvas>
-          <div class="controls">
-            <button id="clear-btn" type="button">Clear</button>
-            <span id="status-text">Draw a spiral above</span>
+        <figure class="figure">
+          <div class="canvas-panel">
+            <canvas id="spiral-canvas" width="480" height="480" aria-label="Spiral drawing canvas"></canvas>
+            <div class="controls">
+              <button id="clear-btn" type="button">Clear</button>
+              <span id="status-text">Draw a spiral above</span>
+            </div>
           </div>
-        </div>
+          <figcaption><strong>Fig. 1</strong> &mdash; Spiral kinematic trace, captured live from pointer input.</figcaption>
+        </figure>
 
         <div class="result-panel" id="result-panel" aria-live="polite">
           <div class="eyebrow">Result</div>
@@ -55,7 +77,7 @@
           </div>
           <div class="result-body hidden" id="result-body">
             <div class="result-label">Estimated probability</div>
-            <div class="result-pct" id="result-pct">—</div>
+            <div class="result-pct" id="result-pct">&mdash;</div>
             <p class="result-summary" id="result-summary"></p>
             <div class="bar-track" aria-hidden="true">
               <div class="bar-fill" id="result-bar"></div>
@@ -71,6 +93,18 @@
           <div class="result-error hidden" id="result-error"></div>
         </div>
       </div>
+
+      <details class="readout" id="readout">
+        <summary>Measured features <span class="readout-hint">instrument readout, this drawing</span></summary>
+        <table class="readout-table">
+          <thead>
+            <tr><th scope="col">Feature</th><th scope="col">Value</th></tr>
+          </thead>
+          <tbody id="readout-body">
+            <tr class="readout-empty"><td colspan="2">Draw a spiral to populate this table.</td></tr>
+          </tbody>
+        </table>
+      </details>
     </main>
   </div>
   <script src="/app.js"></script>

@@ -4,7 +4,7 @@
   "functions": {
     "app.py": {
       "maxDuration": 60,
-      "excludeFiles": "{tests/**,docs/**,.superpowers/**,.pytest_cache/**,**/*.ipynb,**/*.log,**/*.md}"
+      "excludeFiles": "{tests/**,docs/**,.superpowers/**,.pytest_cache/**,**/*.ipynb,**/*.log,**/*.md,parkinson+disease+spiral+drawings+using+digitized+graphics+tablet/**}"
     }
   }
 }
